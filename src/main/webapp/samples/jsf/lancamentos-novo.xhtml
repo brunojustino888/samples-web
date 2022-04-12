@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Novo lançamento</title>
+</h:head>
+
+<h:body>
+
+	<h1>Incluir Novo Lançamento</h1>
+
+	<h:form id="frm">
+
+		<h:commandButton value="Novo" type="reset" />
+		<h:commandButton value="Consultar Lançamentos"
+			action="lancamentos?faces-redirect=true" />
+		<br />
+		<br />
+
+		<h:messages showDetail="false" showSummary="true" />
+
+		<h:panelGrid columns="2">
+
+			<h:outputLabel value="Info: " />
+			<h:selectOneMenu value="#{lancamentoNovoBean.lancamento.pessoa}" required="true">
+				<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+				<f:selectItems value="#{lancamentoNovoBean.listaClientes}" var="cliente" itemLabel="#{cliente.nome}" itemValue="#{cliente}" />
+			</h:selectOneMenu>
+
+			<h:outputLabel value="Descrição: " />
+			<h:inputText size="60" value="#{lancamentoNovoBean.lancamento.descricao}" required="true" label="Descrição do lançamento" />
+
+			<h:outputLabel value="Valor: " />
+			<h:inputText size="12" value="#{lancamentoNovoBean.lancamento.valor}" required="true" label="Valor">
+				<f:convertNumber locale="pt_BR" maxFractionDigits="2" minFractionDigits="2" />
+				<f:validateDoubleRange minimum="0" />
+			</h:inputText>
+
+			<h:outputLabel value="Tipo do lançamento:" for="tipoLancamentoRadio" />
+			<h:selectOneRadio required="true" id="tipoLancamentoRadio" value="#{lancamentoNovoBean.lancamento.tipo}" label="Tipo do lançamento">
+				<f:selectItems value="#{lancamentoNovoBean.tiposLancamentos}"
+					var="tipoLancamento" itemLabel="#{tipoLancamento.descricao}"
+					itemValue="#{tipoLancamento}" />
+			</h:selectOneRadio>
+
+			<h:outputLabel value="Data de Vencimento: " />
+			<h:inputText size="12"
+				value="#{lancamentoNovoBean.lancamento.dataVencimento}"
+				required="true" label="Data de vencimento">
+				<f:convertDateTime pattern="dd/MM/yyyy" />
+			</h:inputText>
+
+			<h:outputLabel value="Lançamento Quitado:" for="pagoCheckbox" />
+			<h:selectBooleanCheckbox id="pagoCheckbox" value="#{lancamentoNovoBean.lancamento.pago}">
+				<p:ajax event="change" />
+			</h:selectBooleanCheckbox>
+
+			<f:facet name="footer">
+				<div><h:commandButton value="Cadastrar" style="margin:auto; width:100px; display:block" action="#{lancamentoNovoBean.cadastrar()}" /></div>
+			</f:facet>
+
+		</h:panelGrid>
+
+		<p:outputPanel autoUpdate="true">
+			<h:outputLabel value="Data de Pagamento: " rendered="#{lancamentoNovoBean.lancamento.pago}" />
+			<p:calendar size="12" required="true" value="#{lancamentoNovoBean.lancamento.dataPagamento}" validator="datafuturaValidator" label="Data de pagamento" rendered="#{lancamentoNovoBean.lancamento.pago}">
+				<f:attribute name="quitado"	value="#{lancamentoNovoBean.lancamento.pago}" />
+			</p:calendar>
+		</p:outputPanel>
+
+	</h:form>
+
+</h:body>
+
+</html>

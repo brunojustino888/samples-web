@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:head> 
+		<title>Jsf2.2 + CDI + Primefaces</title>
+	</h:head>
+	
+	<h:body>
+		<h1>Jsf2.2 + CDI + Primefaces</h1>
+		<h:graphicImage value="/resources/samples/jsf/shield.svg" alt="imageError" height="15px" width="15px" style="float:left; padding-right:3px"/>
+		<h:form>
+			<h:outputFormat value="Value of managedbean: {0} - {1}" >
+				<f:param name="value0" value="#{indexBeanSample.nomeIndexBean2}"/>
+				<f:param name="value1" value="#{indexBeanSample.nomeIndexBeanI2}"/>
+			</h:outputFormat>
+		</h:form>
+		<br /><hr /><br />
+		<h:form>
+			<h:outputLabel value="Escolha um item no combo:"/>
+			<h:selectOneMenu value="#{indexBeanSample.inputComboSelecionado}">
+				<f:selectItem itemLabel="JSF" itemValue="jsf"/>
+				<f:selectItem itemLabel="JPA" itemValue="jpa"/>
+				<f:selectItem itemLabel="CDI" itemValue="cdi"/>
+			</h:selectOneMenu>
+			<br />
+			<h:commandButton action="#{indexBeanSample.mostrarItemCombo()}" value="Submit To Server" />
+			<br />
+			<h:outputText value="#{indexBeanSample.inputComboSelecionado}" rendered="#{not empty indexBeanSample.inputComboSelecionado}" />
+		</h:form>
+	</h:body>
+
+</html>

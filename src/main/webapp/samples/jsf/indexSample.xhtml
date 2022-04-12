@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core" >
+
+	<h:head> 
+		<title>Jsf2.2 + CDI</title>
+	</h:head>
+	
+	<h:body>
+		
+		<h:form>
+		    <h:commandLink action="indexSample2?faces-redirect=true" value="Outra Area" />
+			Nome do produto: <h:inputText value="#{indexBeanSample.produto.nome}" />
+			<br /><br />
+			Categoria do produto: <h:inputText value="#{indexBeanSample.produto.categoria}" />
+			<br /><br />
+			<h:commandButton value="Confirmar" action="#{indexBeanSample.acao()}">
+				<f:actionListener type="org.samplesweb.samples.jsf.beans.IndexBeanSampleListener"/>
+			</h:commandButton>	
+			<br /><hr /><br />
+			<ul>
+				<ui:repeat var="item" value="#{indexBeanSample.listaProdutos}">
+					<li>#{item.nome} - #{item.categoria}</li>
+					<h:commandButton action="#{indexBeanSample.excluir}" value="Excluir" actionListener="#{indexBeanSample.verificaAcaoListener()}">
+						<f:setPropertyActionListener target="#{indexBeanSample.produtoSelecionado}" value="#{item}" />						
+					</h:commandButton>
+				</ui:repeat>
+			</ul>
+		</h:form>		 
+		
+		<h:form>
+			<br /><br /><hr />
+		    Pesquisar: <h:inputText value="#{indexBeanSample.nomeDaPesquisa}" /> 			 
+		    <h:commandButton action="#{indexBeanSample.pesquisar()}" value="Pesquisar" />
+		    <ul>
+				<ui:repeat var="item2" value="#{indexBeanSample.listaProdutosFiltrados}">
+					<li>#{item2.nome} - #{item2.categoria}</li> 
+				</ui:repeat>
+			</ul>
+		</h:form>	
+		
+	</h:body>
+
+</html>

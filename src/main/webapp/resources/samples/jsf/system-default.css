@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+.codigo {
+	text-align:center;
+}
+
+.lancamento {
+}
+
+.descricao {
+}
+
+.valor{
+	text-align:center;	
+}
+
+.situacao{
+	text-align:center;
+}
+
+.vencimento{
+	text-align:center;
+}
+
+.acoes{
+	text-align:center;
+}

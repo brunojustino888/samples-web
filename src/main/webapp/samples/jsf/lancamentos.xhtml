@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:head>
+		<title>Lançamentos</title>
+		<h:outputStylesheet library="samples/jsf" name="system-default.css"/>
+	</h:head>
+	
+	<h:body>
+		
+		<br /><h:graphicImage value="/resources/samples/jsf/lancamentos.png" style="float:left; margin-right: 5px;"/>
+		
+		<br /><h1>Lançamentos</h1><br />
+		
+		<h:form>
+		
+			<br /><h:commandButton value="Incluir Lançamento" action="lancamentos-novo"/><br /><br />
+			
+		</h:form>
+	
+		<h:form>
+		
+			<h:dataTable border="1" width="100%" value="#{indexBeanCliente.clienteLista}" var="cliente" 
+				rendered="#{not empty indexBeanCliente.clienteLista}" columnClasses="codigo, lancamento, descricao, valor, vencimento, situacao, acoes">
+			
+				<h:column>
+					<f:facet name="header">Cod</f:facet>
+					<h:outputText value="#{cliente.cod}"/>
+				</h:column>		
+				
+				<h:column>
+					<f:facet name="header">Lançamento</f:facet>
+					<h:graphicImage value="/resources/samples/jsf/receita.fw.png" style="margin-right: 2px;"/>
+					<h:outputText value="#{cliente.nome}" />
+				</h:column>				
+				
+				<h:column>
+					<f:facet name="header">Descrição</f:facet>
+					<h:inputText value="#{cliente.cidade}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Valor</f:facet>
+					<h:outputText value="#{cliente.nome}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Vencimento</f:facet>
+					<h:outputText value="#{cliente.nome}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Situação</f:facet>
+					<h:outputText value="#{cliente.nome}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Ações</f:facet>
+					<h:commandButton action="#{indexBeanCliente.salvar(cliente.cod)}" value="Salvar" /> 
+					<h:commandButton action="#{indexBeanCliente.excluir(cliente.cod)}" value="Excluir" /> 
+				</h:column>
+			
+			</h:dataTable>
+			
+		</h:form>
+	
+	</h:body>
+
+</html>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:head> 
+		<title>Jsf2.2 + CDI</title>
+	</h:head>
+	
+	<h:body>
+		
+		<h1>Jsf2.2 + CDI</h1>
+		
+		<h:form id="frm">
+		
+			<h:outputLabel value="Jsf2.2 + CDI + Primefaces:"/>
+			
+			<h:selectOneRadio value="#{indexBeanSample2.campoRadio}" layout="pageDirection">
+				<f:selectItem itemLabel="JSF" itemValue="jsf" />
+				<f:selectItem itemLabel="CDI" itemValue="cdi" />
+				<f:selectItem itemLabel="Primefaces" itemValue="primefaces"/>
+			</h:selectOneRadio>
+			
+			<br /><hr />Favor Checar para mostrar os campos escondidos da tela
+			
+			<h:selectBooleanCheckbox title="Checar para Mostrar os campos escondidos" value="#{indexBeanSample2.campoBooleanCheckBox}">
+				<p:ajax event="change" update="@form" />
+			</h:selectBooleanCheckbox>
+			
+			<br />#{indexBeanSample2.acao1()}<br />
+			
+			<h:outputLink value="http://www.google.com.br">Google
+				<f:param name="q" value="brunojustino888" />
+			</h:outputLink><br /><!-- nao submete os dados do form na requisicao -->
+			
+			<!-- O componente commandLink necessita colocar de forma explicita o redirecionamento
+			para indexSample?faces-redirect=true , os outros componentes outputLink e Link fazem de forma implicita -->
+			<h:commandLink action="indexSample" value="Navegar para indexSample.xhtml" /><br /> <!-- submete os dados do form na requisicao -->
+			
+			<h:link value="Navegar para indexSample2.xhtml" outcome="indexSample2" /><br /><hr /><br /> <!-- nao submete os dados do form na requisicao -->
+			
+			<h:inputText rendered="#{indexBeanSample2.campoBooleanCheckBox}" value="#{indexBeanSample2.email}" id="inputEmail" />
+			<h:message for="inputEmail" infoStyle="color:blue" />
+			
+			<h:commandButton action="#{indexBeanSample2.acao()}" value="Submit" rendered="#{indexBeanSample2.campoBooleanCheckBox}" />
+			
+			<h:commandButton type="reset" value="Limpar" rendered="#{indexBeanSample2.campoBooleanCheckBox}" />
+		
+			<h:messages errorStyle="color:orange" infoStyle="color:blue" warnStyle="color:yellow" fatalStyle="color:red" />
+		
+		</h:form>
+		
+		<h:form>
+		
+			<!-- O panelGrid devera agrupar os componentes da hierarquia criando uma tabela, de acordo com o numero de colunas -->
+			<!-- O panelGroup devera agrupar os componentes dentro de uma mesma area-->
+			<h:panelGrid columns="2" >
+				
+				<f:facet name="header">
+					Title
+				</f:facet>
+				
+				<h:outputLabel value="Label" />				
+				<h:outputLabel value="Campo" />	
+				
+				<h:outputLabel value="Label" />		
+				<h:panelGroup>
+					<h:outputLabel value="Campo" />	
+					<h:outputLabel value="Imagem" />	
+				</h:panelGroup>		
+							
+				
+				<h:outputLabel value="Label" />				
+				<h:outputLabel value="Campo" />	
+				
+				<f:facet name="footer">
+					<h:outputLabel value="FOOTER" style="margin:0 auto; width:50px; display:block" />
+				</f:facet>
+			
+			</h:panelGrid>
+		
+		</h:form>
+	
+	</h:body>
+
+</html>
